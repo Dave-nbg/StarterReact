@@ -22,3 +22,55 @@ npm start
 ```
 
 Zet evt ook nog de package-lock en package.json in de gitignore.
+
+# Router installatie
+## Stap 1: npm download
+Download React router:
+```
+npm install react-router-dom
+```
+
+## Stap 2: verander index.js
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import './index.css';
+
+ReactDOM.render(
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>,
+    document.getElementById('root')
+);
+
+```
+
+## Stap 3: verander je app.js
+```
+import React from 'react';
+import { Route, Routes, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import About from "./pages/About";
+
+function App() {
+  return (
+      <div>
+        <nav>
+          <ul>
+            <li><Link to="/Home">Home</Link></li>
+              <li> <Link to={"/about"}>About</Link></li>
+          </ul>
+        </nav>
+        <Routes>
+            <Route path="/Home" element={<Home />} />
+            <Route path="/about" element={<About/>}/>
+        </Routes>
+      </div>
+  );
+}
+
+export default App;
+```
