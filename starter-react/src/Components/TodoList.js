@@ -1,5 +1,6 @@
 import Button from "@mui/material/Button";
 import React from 'react'
+import ToDoItem from "./ToDoItem";
 function ToDoList (){
     const [list, setList] = React.useState([{text: "test", completed: false},{text: "testje", completed: false}]);
     const [inputItem,setInputItem] = React.useState("");
@@ -20,7 +21,9 @@ function ToDoList (){
     }
 
     const changeCompleted = (index) => {
-        list[index].completed = !list[index].completed
+        const newList = [...list];
+        newList[index] = { ...newList[index], completed: !newList[index].completed };
+        setList(newList)
     }
 
 
@@ -33,9 +36,10 @@ function ToDoList (){
             <ul>
                 {list.map((listItem,index)=>(
                     <div>
-                        <input type={"checkbox"} value={listItem.completed} onChange={()=>changeCompleted(index)}/>
-                        <li>{listItem.text}</li>
-                        <Button onClick={()=>deleteItemAdvanced(index)}>X</Button>
+                        <ToDoItem index={index} text={listItem.text} completed={listItem.completed} changeCompleted={() => changeCompleted(index)} deleteItemAdvanced={() => deleteItemAdvanced(index)}/>
+                        {/*<input type={"checkbox"} value={listItem.completed} onChange={()=>changeCompleted(index)}/>*/}
+                        {/*<li>{listItem.text}</li>*/}
+                        {/*<Button onClick={()=>deleteItemAdvanced(index)}>X</Button>*/}
                     </div>
                 ))}
             </ul>
